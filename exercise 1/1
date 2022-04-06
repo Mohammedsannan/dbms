@@ -1,0 +1,193 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| INVOICE            |
+| LIBRARY            |
+| LIBRARY1           |
+| Library            |
+| MYWALLET           |
+| VIEW               |
+| abc                |
+| college            |
+| employee           |
+| ksb                |
+| mysql              |
+| mywallet           |
+| performance_schema |
+| phpmyadmin         |
+| sanan              |
+| sys                |
+| thamnees           |
+| triggers           |
++--------------------+
+19 rows in set (0.53 sec)
+
+mysql> use sanan;
+
+experiment 1:
+
+mysql> create table employee (emp_id int,name varchar(15),city varchar(16),dob date,adhar_no int);
+Query OK, 0 rows affected (0.91 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_sanan |
++-----------------+
+| book            |
+| customer        |
+| emp             |
+| employee        |
+| mark            |
+| njr             |
+| orders          |
+| person          |
+| qualification   |
+| std             |
++-----------------+
+10 rows in set (0.00 sec)
+
+experiment 2:
+
+mysql> create table student (roll_no int primary key,name varchar(15) not null,age int not null,address varchar(50),gender char default 'm',check(0<=age<100));
+Query OK, 0 rows affected (0.92 sec)
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int(11)     | NO   | PRI | NULL    |       |
+| name    | varchar(15) | NO   |     | NULL    |       |
+| age     | int(11)     | NO   |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
+| gender  | char(1)     | YES  |     | m       |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | int(11)     | YES  |     | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| city     | varchar(16) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+experiment 3:
+
+mysql> create temporary table student1 select * from student;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student1;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int(11)     | NO   |     | NULL    |       |
+| name    | varchar(15) | NO   |     | NULL    |       |
+| age     | int(11)     | NO   |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
+| gender  | char(1)     | YES  |     | m       |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+experiment 4:
+
+mysql> create table if not exists empl select * from employee;
+Query OK, 0 rows affected (0.83 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc empl;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | int(11)     | YES  |     | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| city     | varchar(16) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+experiment 5:
+
+mysql> create database invoice;
+Query OK, 1 row affected (0.44 sec)
+
+mysql> use invoice;
+Database changed
+mysql> create table customer (id int,name varchar(20),address varchar(40),city varchar(10),ph_no int);
+Query OK, 0 rows affected (0.81 sec)
+
+mysql> desc customer;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int(11)     | YES  |     | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| address | varchar(40) | YES  |     | NULL    |       |
+| city    | varchar(10) | YES  |     | NULL    |       |
+| ph_no   | int(11)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create table product (pid int,pname varchar(20),price float default '0');
+
+Query OK, 0 rows affected (0.82 sec)
+
+mysql> desc product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| pid   | int(11)     | YES  |     | NULL    |       |
+| pname | varchar(20) | YES  |     | NULL    |       |
+| price | float       | YES  |     | 0       |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table customer modify id int primary key;
+Query OK, 0 rows affected (0.79 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> create table invoice_master(inv_id int,cust_id int,inv_date date,foreign key (cust_id) references customer(id));
+Query OK, 0 rows affected (0.66 sec)
+
+mysql> desc invoice_master;
++----------+---------+------+-----+---------+-------+
+| Field    | Type    | Null | Key | Default | Extra |
++----------+---------+------+-----+---------+-------+
+| inv_id   | int(11) | YES  |     | NULL    |       |
+| cust_id  | int(11) | YES  | MUL | NULL    |       |
+| inv_date | date    | YES  |     | NULL    |       |
++----------+---------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> alter table product modify pid int primary key;
+Query OK, 0 rows affected (1.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table invoice_master modify inv_id int primary key;
+Query OK, 0 rows affected (1.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> create table invoice_item(inv_id int,pid int,quantity int,foreign key (inv_id) references invoice_master(inv_id),foreign key (pid) references product (pid));
+Query OK, 0 rows affected (1.08 sec)
+
+mysql> desc invoice_item;
++----------+---------+------+-----+---------+-------+
+| Field    | Type    | Null | Key | Default | Extra |
++----------+---------+------+-----+---------+-------+
+| inv_id   | int(11) | YES  | MUL | NULL    |       |
+| pid      | int(11) | YES  | MUL | NULL    |       |
+| quantity | int(11) | YES  |     | NULL    |       |
++----------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+
+
+
