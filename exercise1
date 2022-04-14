@@ -149,7 +149,7 @@ mysql> desc product;
 +-------+-------------+------+-----+---------+-------+
 3 rows in set (0.00 sec)
 
-mysql> alter table customer modify id int primary key;
+mysql> alter table customer modify id int primary key;  //USE CREATE COMMAND
 Query OK, 0 rows affected (0.79 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
@@ -166,7 +166,7 @@ mysql> desc invoice_master;
 +----------+---------+------+-----+---------+-------+
 3 rows in set (0.01 sec)
 
-mysql> alter table product modify pid int primary key;
+mysql> alter table product modify pid int primary key;  USE CREATE COMMAND
 Query OK, 0 rows affected (1.05 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
@@ -189,5 +189,6 @@ mysql> desc invoice_item;
 
 
 
-
+//EXP:1 IS DDL CREATE COMMAND..USE CREATE COMMAND ONLY
+// ADD EXPERIMENT NUMBER AND QUESTION
 
