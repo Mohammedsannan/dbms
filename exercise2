@@ -1,0 +1,180 @@
+					DDL COMMANDS- ALTER & DROP
+
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| INVOICE            |
+| LIBRARY            |
+| LIBRARY1           |
+| Library            |
+| MYWALLET           |
+| VIEW               |
+| abc                |
+| college            |
+| employee           |
+| invoice            |
+| ksb                |
+| mysql              |
+| mywallet           |
+| performance_schema |
+| phpmyadmin         |
+| sanan              |
+| sys                |
+| thamnees           |
+| triggers           |
++--------------------+
+20 rows in set (0.57 sec)
+
+mysql> use sanan;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_sanan |
++-----------------+
+| book            |
+| customer        |
+| emp             |
+| empl            |
+| employee        |
+| mark            |
+| njr             |
+| orders          |
+| person          |
+| qualification   |
+| std             |
+| student         |
++-----------------+
+12 rows in set (0.00 sec)
+
+experiment 1:Add a column ‘SSN’ at the first
+position in the table EMPLOYEE
+
+mysql> alter table employee add ssn int first;
+Query OK, 0 rows affected (1.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ssn      | int(11)     | YES  |     | NULL    |       |
+| emp_id   | int(11)     | YES  |     | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| city     | varchar(16) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+experiment 2:Change the data type of the column
+‘DOB’  in year the table EMPLOYEE   
+
+mysql> alter table employee modify dob int;
+Query OK, 0 rows affected (0.73 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ssn      | int(11)     | YES  |     | NULL    |       |
+| emp_id   | int(11)     | YES  |     | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| city     | varchar(16) | YES  |     | NULL    |       |
+| dob      | int(11)     | YES  |     | NULL    |       |
+| adhar_no | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+experiment 3:Delete
+the column ‘emp_id’ the table EMPLOYEE.
+
+mysql> alter table employee drop emp_id ;
+Query OK, 0 rows affected (1.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ssn      | int(11)     | YES  |     | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| city     | varchar(16) | YES  |     | NULL    |       |
+| dob      | int(11)     | YES  |     | NULL    |       |
+| adhar_no | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+experiment 4:Add  the constraint unique for columns ‘SSN, ‘adhar_no’
+the table EMPLOYEEDelete
+the NULL constraint of ‘age’ in the STUDENT table.
+
+mysql> alter table employee add constraint unique(ssn,adhar_no);
+Query OK, 0 rows affected (0.76 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ssn      | int(11)     | YES  | MUL | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| city     | varchar(16) | YES  |     | NULL    |       |
+| dob      | int(11)     | YES  |     | NULL    |       |
+| adhar_no | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+experiment 5:Delete
+the NULL constraint of ‘age’ in the STUDENT table.
+
+mysql> alter table student modify age int null;
+Query OK, 0 rows affected (1.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int(11)     | NO   | PRI | NULL    |       |
+| name    | varchar(15) | NO   |     | NULL    |       |
+| age     | int(11)     | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
+| gender  | char(1)     | YES  |     | m       |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+experiment 6:Change
+the table name EMPLOYEE as PERSON
+
+mysql> drop table person;
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> alter table employee rename to person;
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> desc person;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ssn      | int(11)     | YES  | MUL | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| city     | varchar(16) | YES  |     | NULL    |       |
+| dob      | int(11)     | YES  |     | NULL    |       |
+| adhar_no | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+experiment 7:Delete 
+the duplicate table.
+
+mysql> drop table empl;
+Query OK, 0 rows affected (0.20 sec)
+
