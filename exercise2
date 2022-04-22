@@ -1,5 +1,5 @@
 					DDL COMMANDS- ALTER & DROP
-
+				    ------------------------------------
 
 mysql> show databases;
 +--------------------+
@@ -178,3 +178,6 @@ the duplicate table.
 mysql> drop table empl;
 Query OK, 0 rows affected (0.20 sec)
 
+
+
+//VERIFIED
