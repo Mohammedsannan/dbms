@@ -1,6 +1,6 @@
 					DML COMMANDS-INSERT
-
-
+				    ------------------------
+		
 
 mysql> show databases;
 +--------------------+
@@ -350,6 +350,6 @@ mysql> select * from invoice_item;
 +--------+------+----------+
 10 rows in set (0.00 sec)
 
-
+//VERIFIED
 
 
