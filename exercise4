@@ -1,3 +1,6 @@
+                      EXP 4--
+
+
 mysql> show databases;
 +--------------------+
 | Database           |
@@ -55,7 +58,7 @@ mysql> select * from product;
 +-----+------------+-------+
 5 rows in set (0.00 sec)
 
-mysql> update product set price=100000 where pid=1;
+mysql> update product set price=100000 where pid=1; //MENTION PRODUCT NAME LIKE 'PEN'
 Query OK, 1 row affected (0.08 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
@@ -86,7 +89,7 @@ mysql> select * from customer;
 +----+-------+---------+-----------+-----------+
 6 rows in set (0.00 sec)
 
-mysql> update customer set city='kozhikode' where id=6;
+mysql> update customer set city='kozhikode' where id=6;  //WRONG
 Query OK, 1 row affected (0.51 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
@@ -185,7 +188,7 @@ mysql> select * from invoice_item;
 +--------+------+----------+
 10 rows in set (0.00 sec)
 
-mysql> update invoice_item set quantity=5 where inv_id=123;
+mysql> update invoice_item set quantity=5 where inv_id=123;  //PRODUCT ID NEEDED IN CONDITION
 Query OK, 2 rows affected (0.51 sec)
 Rows matched: 2  Changed: 2  Warnings: 0
 
@@ -206,3 +209,6 @@ mysql> select * from invoice_item;
 +--------+------+----------+
 10 rows in set (0.00 sec)
 
+
+
+//CORRECT THE QUERIES
