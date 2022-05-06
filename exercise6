@@ -1,0 +1,344 @@
+1.List all customer details.
+
+
+mysql> select * from customer;
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  1 | arjun | pv      | ekm       |   790997 |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  3 | sadi  | to      | london    |  9995796 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
++----+-------+---------+-----------+----------+
+4 rows in set (0.00 sec)
+
+2.List pname, price of all products.
+
+mysql> select distinct pname,price from product;
++------------+--------+
+| pname      | price  |
++------------+--------+
+| iphone     | 102000 |
+| airpode    |  15300 |
+| screencard |  49.98 |
+| earphone   |   71.4 |
+| pouch      |   61.2 |
++------------+--------+
+5 rows in set (0.00 sec)
+
+
+3.List all invoice items, avoid duplicates.
+
+mysql> select inv_id from invoice_item;
++--------+
+| inv_id |
++--------+
+|    123 |
+|    124 |
+|    125 |
+|    126 |
+|    126 |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> select distinct inv_id from invoice_item;
++--------+
+| inv_id |
++--------+
+|    123 |
+|    124 |
+|    125 |
+|    126 |
++--------+
+4 rows in set (0.02 sec)
+
+
+4.List product price between 50rs and 150rs
+
+mysql> select * from product;
++-----+------------+--------+
+| pid | pname      | price  |
++-----+------------+--------+
+|   1 | iphone     | 102000 |
+|   2 | airpode    |  15300 |
+|   3 | screencard |  49.98 |
+|   4 | earphone   |   71.4 |
+|   5 | pouch      |   61.2 |
++-----+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product where price between 50 and 150;
++-----+----------+-------+
+| pid | pname    | price |
++-----+----------+-------+
+|   4 | earphone |  71.4 |
+|   5 | pouch    |  61.2 |
++-----+----------+-------+
+2 rows in set (0.00 sec)
+
+
+
+5.List the customer details who lives in ‘ekm’,’tvm’.
+
+mysql> select * from customer;
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  1 | arjun | pv      | ekm       |   790997 |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  3 | sadi  | to      | london    |  9995796 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
++----+-------+---------+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from customer where city in('ekm','tvm');
++----+-------+---------+------+--------+
+| id | name  | address | city | ph_no  |
++----+-------+---------+------+--------+
+|  1 | arjun | pv      | ekm  | 790997 |
+|  2 | ameen | cp      | tvm  | 576950 |
++----+-------+---------+------+--------+
+2 rows in set (0.00 sec)
+
+
+6.List the invoice details from 1st January 2022 to 31st march 2022
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    123 |       1 | 2022-03-18 |
+|    124 |       2 | 2022-03-19 |
+|    125 |       3 | 2022-03-20 |
+|    126 |       4 | 2022-09-21 |
++--------+---------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from invoice_master where inv_date between '2022-01-01' and '2022-03-31';
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    123 |       1 | 2022-03-18 |
+|    124 |       2 | 2022-03-19 |
+|    125 |       3 | 2022-03-20 |
++--------+---------+------------+
+3 rows in set (0.00 sec)
+
+
+7.List the customer details who not live in ‘tvm’.
+
+mysql> select * from customer;
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  1 | arjun | pv      | ekm       |   790997 |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  3 | sadi  | to      | london    |  9995796 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
++----+-------+---------+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from customer where city !='tvm';
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  1 | arjun | pv      | ekm       |   790997 |
+|  3 | sadi  | to      | london    |  9995796 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
++----+-------+---------+-----------+----------+
+3 rows in set (0.00 sec)
+
+
+8.List the customers who have no phone number.
+
+mysql> select * from customer;
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  1 | arjun | pv      | ekm       |   790997 |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  3 | sadi  | to      | london    |  9995796 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
+|  5 | anand | o       | mahi      |     NULL |
++----+-------+---------+-----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from customer where ph_no is null;
++----+-------+---------+------+-------+
+| id | name  | address | city | ph_no |
++----+-------+---------+------+-------+
+|  5 | anand | o       | mahi |  NULL |
++----+-------+---------+------+-------+
+1 row in set (0.00 sec)
+
+
+9.Display customer names in descending order.
+
+mysql> select * from customer;
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  1 | arjun | pv      | ekm       |   790997 |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  3 | sadi  | to      | london    |  9995796 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
+|  5 | anand | o       | mahi      |     NULL |
++----+-------+---------+-----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from customer order by name desc;
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  3 | sadi  | to      | london    |  9995796 |
+|  1 | arjun | pv      | ekm       |   790997 |
+|  5 | anand | o       | mahi      |     NULL |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
++----+-------+---------+-----------+----------+
+5 rows in set (0.00 sec)
+
+
+10.Display the customer details sorted in ascending by city and descending by names.
+
+mysql> select * from customer;
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  1 | arjun | pv      | ekm       |   790997 |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  3 | sadi  | to      | london    |  9995796 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
+|  5 | anand | o       | mahi      |     NULL |
++----+-------+---------+-----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from customer order by city;
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  1 | arjun | pv      | ekm       |   790997 |
+|  3 | sadi  | to      | london    |  9995796 |
+|  5 | anand | o       | mahi      |     NULL |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
++----+-------+---------+-----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from customer order by name desc;
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  3 | sadi  | to      | london    |  9995796 |
+|  1 | arjun | pv      | ekm       |   790997 |
+|  5 | anand | o       | mahi      |     NULL |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
++----+-------+---------+-----------+----------+
+5 rows in set (0.00 sec)
+
+
+
+11.Find the customer names start with ‘A’.
+
+mysql> select * from customer where name like 'a%';
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  1 | arjun | pv      | ekm       |   790997 |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
+|  5 | anand | o       | mahi      |     NULL |
++----+-------+---------+-----------+----------+
+4 rows in set (0.00 sec)
+
+
+12.Find the customer names who have ‘e’ or ‘a’ in them.
+
+mysql> select * from customer;
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  1 | arjun | pv      | ekm       |   790997 |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  3 | sadi  | to      | london    |  9995796 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
+|  5 | anand | o       | mahi      |     NULL |
+|  6 | binu  | tp      | mlprm     |   354645 |
++----+-------+---------+-----------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from customer where name like '%e%' or name like '%a%';
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  1 | arjun | pv      | ekm       |   790997 |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  3 | sadi  | to      | london    |  9995796 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
+|  5 | anand | o       | mahi      |     NULL |
++----+-------+---------+-----------+----------+
+5 rows in set (0.00 sec)
+
+
+13.Find the customer names who have at least 3 characters.
+
+mysql> select * from customer;
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  1 | arjun | pv      | ekm       |   790997 |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  3 | sadi  | to      | london    |  9995796 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
+|  5 | anand | o       | mahi      |     NULL |
+|  6 | binu  | tp      | mlprm     |   354645 |
++----+-------+---------+-----------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from customer where name like '____';
++----+------+---------+-----------+----------+
+| id | name | address | city      | ph_no    |
++----+------+---------+-----------+----------+
+|  3 | sadi | to      | london    |  9995796 |
+|  4 | adhi | mp      | vailathur | 73066547 |
+|  6 | binu | tp      | mlprm     |   354645 |
++----+------+---------+-----------+----------+
+3 rows in set (0.00 sec)
+
+
+14.List the names of customers their names have ‘r’ in second position.
+
+mysql> select * from customer where name like '_r%';
++----+-------+---------+------+--------+
+| id | name  | address | city | ph_no  |
++----+-------+---------+------+--------+
+|  1 | arjun | pv      | ekm  | 790997 |
++----+-------+---------+------+--------+
+1 row in set (0.00 sec)
+
+
+15.Find the customer names start with ‘a’ and are at least 3 characters in length.
+
+mysql> select * from customer where name like 'a__%';
++----+-------+---------+-----------+----------+
+| id | name  | address | city      | ph_no    |
++----+-------+---------+-----------+----------+
+|  1 | arjun | pv      | ekm       |   790997 |
+|  2 | ameen | cp      | tvm       |   576950 |
+|  4 | adhi  | mp      | vailathur | 73066547 |
+|  5 | anand | o       | mahi      |     NULL |
++----+-------+---------+-----------+----------+
+4 rows in set (0.01 sec)
+
+
+
+
+
+
+
+
+
+
+
+
