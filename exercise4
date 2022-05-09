@@ -1,3 +1,7 @@
+//EXP NO:
+
+
+
 mysql> show databases;
 +--------------------+
 | Database           |
@@ -148,7 +152,7 @@ mysql> select * from customer;
 +----+-------+---------+-----------+-----------+
 6 rows in set (0.00 sec)
 
-mysql>  update customer set address='to',city='london',ph_no=9995796 where id=3;
+mysql>  update customer set address='to',city='london',ph_no=9995796 where id=3; //MENTION CUSTOMER NAME
 
 Query OK, 1 row affected (0.50 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
@@ -206,3 +210,4 @@ mysql> select * from invoice_item;
 +--------+------+----------+
 10 rows in set (0.00 sec)
 
+//VERIFIED
