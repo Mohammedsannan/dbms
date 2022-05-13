@@ -1,4 +1,4 @@
-
+EX:NO ???????????????/
 
 
 1.List the product name and quantity of invoice items.
@@ -87,3 +87,4 @@ er on customer.id=invoice_master.cust_id left join invoice_item on invoice_item.
 11 rows in set (0.00 sec)
 
 
+//VERIFIED
