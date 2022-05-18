@@ -1,0 +1,100 @@
+                                                     13. TCL COMMANDS
+
+
+1. Commit
+2. Rollback
+3. Savepoint
+
+mysql> create database njr;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> use njr;
+Database changed
+mysql> create table players(id int,name varchar(20),position varchar(5));
+Query OK, 0 rows affected (0.35 sec)
+
+mysql> set autocommit=off;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into players values(1,'neymar','lwf');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into players values(2,'messi','rwf');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into players values(3,'cr7','cf');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from players;
++------+--------+----------+
+| id   | name   | position |
++------+--------+----------+
+|    1 | neymar | lwf      |
+|    2 | messi  | rwf      |
+|    3 | cr7    | cf       |
++------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> insert into players values(4,'coutinho','cmf');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into players values(5,'bruno','cmf');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select * from players;
++------+--------+----------+
+| id   | name   | position |
++------+--------+----------+
+|    1 | neymar | lwf      |
+|    2 | messi  | rwf      |
+|    3 | cr7    | cf       |
++------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> insert into players values(6,'fred','cmf');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into players values(7,'arthur','dmf');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint a;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into players values(8,'casemero','dmf');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into players values(9,'fabinho','dmf');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint b;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into players values(10,'alisson','gk');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into players values(11,'ederson','gk');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> rollback to b;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from players;
++------+----------+----------+
+| id   | name     | position |
++------+----------+----------+
+|    1 | neymar   | lwf      |
+|    2 | messi    | rwf      |
+|    3 | cr7      | cf       |
+|    6 | fred     | cmf      |
+|    7 | arthur   | dmf      |
+|    8 | casemero | dmf      |
+|    9 | fabinho  | dmf      |
++------+----------+----------+
+7 rows in set (0.00 sec)
+

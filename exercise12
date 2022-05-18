@@ -1,0 +1,53 @@
+12. DCL COMMAND
+Create two users user1, user2
+
+
+1. GRANT
+Give insert and select privilege to user 1 on customer table in the invoice database.
+Give update and delete privilege to user 2 on all tables in the invoice database.
+
+mysql> create user sanan@'localhost' identified by '101';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create user alen@'localhost' identified by '101';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> grant insert,select on customer to sanan@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> grant delete,update on *.* to alen@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for sanan@'localhost';
++---------------------------------------------------------------------+
+| Grants for sanan@localhost                                          |
++---------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'sanan'@'localhost'                           |
+| GRANT SELECT, INSERT ON `invoice`.`customer` TO 'sanan'@'localhost' |
++---------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> show grants for alen@'localhost';
++---------------------------------------------------+
+| Grants for alen@localhost                         |
++---------------------------------------------------+
+| GRANT UPDATE, DELETE ON *.* TO 'alen'@'localhost' |
++---------------------------------------------------+
+1 row in set (0.00 sec)
+
+
+2. REVOKE
+Remove delete privilege of user 2.
+
+mysql> revoke delete on *.* from alen@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for alen@'localhost';
++-------------------------------------------+
+| Grants for alen@localhost                 |
++-------------------------------------------+
+| GRANT UPDATE ON *.* TO 'alen'@'localhost' |
++-------------------------------------------+
+1 row in set (0.00 sec)
+
+
