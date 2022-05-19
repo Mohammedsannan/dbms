@@ -1,3 +1,6 @@
+EXP: NO:
+
+
 1.List all customer details.
 
 
@@ -334,7 +337,7 @@ mysql> select * from customer where name like 'a__%';
 
 
 
-
+//VERIFIED
 
 
 
