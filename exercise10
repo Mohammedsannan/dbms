@@ -35,3 +35,4 @@ mysql> select * from v2;
 +-------+--------+-----+----------+
 5 rows in set (0.03 sec)
 
+//VERIFIED
