@@ -1,0 +1,124 @@
+                          11 Optimising database (Using Set, arithmetic, logical and special operators)
+
+
+1.Display customer_id,city who lives either in clt and tvm.(using set operation)
+
+mysql> select * from customer;
++----+--------+---------+-----------+----------+
+| id | name   | address | city      | ph_no    |
++----+--------+---------+-----------+----------+
+|  1 | arju   | pv      | ekm       |   790997 |
+|  2 | ameen  | cp      | tvm       |   576950 |
+|  3 | sadi   | to      | london    |  9995796 |
+|  4 | adhi   | mp      | vailathur | 73066547 |
+|  5 | anand  | o       | mahi      |     NULL |
+|  6 | binu   | tp      | mlprm     |   354645 |
+|  7 | binesh | pt      | ekm       |  5456567 |
+|  8 | suresh | p       | mahi      |  8456567 |
+|  9 | ramesh | op      | london    |  9786567 |
+| 10 | amesh  | vp      | london    |  2386567 |
++----+--------+---------+-----------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select id,city from customer where city='ekm' union select id,city from customer where city='tvm';
++----+------+
+| id | city |
++----+------+
+|  1 | ekm  |
+|  7 | ekm  |
+|  2 | tvm  |
++----+------+
+3 rows in set (0.00 sec)
+
+
+2.Display product details with an updated price amount(new price= old price+5rs)
+
+mysql> select * from product;
++-----+------------+--------+
+| pid | pname      | price  |
++-----+------------+--------+
+|   1 | iphone     | 102000 |
+|   2 | airpode    |  15300 |
+|   3 | screencard |  49.98 |
+|   4 | earphone   |   71.4 |
+|   5 | pouch      |   61.2 |
+|   6 | soap       |     20 |
++-----+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select pid,pname,price,price+5 as  "new_price" from product;
++-----+------------+--------+-------------------+
+| pid | pname      | price  | new_price         |
++-----+------------+--------+-------------------+
+|   1 | iphone     | 102000 |            102005 |
+|   2 | airpode    |  15300 |             15305 |
+|   3 | screencard |  49.98 | 54.97999954223633 |
+|   4 | earphone   |   71.4 |  76.4000015258789 |
+|   5 | pouch      |   61.2 | 66.20000076293945 |
+|   6 | soap       |     20 |                25 |
++-----+------------+--------+-------------------+
+6 rows in set (0.00 sec)
+
+3.Display customer details who doesn’t have phone number and lives in ‘mahi’ city (use logical operators)
+
+mysql> select * from customer;
++----+--------+---------+-----------+----------+
+| id | name   | address | city      | ph_no    |
++----+--------+---------+-----------+----------+
+|  1 | arjun  | pv      | ekm       |   790997 |
+|  2 | ameen  | cp      | tvm       |   576950 |
+|  3 | sadi   | to      | london    |  9995796 |
+|  4 | adhi   | mp      | vailathur | 73066547 |
+|  5 | anand  | o       | mahi      |     NULL |
+|  6 | binu   | tp      | mlprm     |   354645 |
+|  7 | binesh | pt      | ekm       |  5456567 |
+|  8 | suresh | p       | mahi      |  8456567 |
+|  9 | ramesh | op      | london    |  9786567 |
+| 10 | amesh  | vp      | london    |  2386567 |
++----+--------+---------+-----------+----------+
+10 rows in set (0.00 sec)
+
+
+mysql> select * from customer where city='mahi' and ph_no is null;
++----+-------+---------+------+-------+
+| id | name  | address | city | ph_no |
++----+-------+---------+------+-------+
+|  5 | anand | o       | mahi |  NULL |
++----+-------+---------+------+-------+
+1 row in set (0.00 sec)
+
+4.List the product names if it finds any records in the invoice items table has quantity =3 (use special operators)
+
+mysql> select * from product;
++-----+------------+--------+
+| pid | pname      | price  |
++-----+------------+--------+
+|   1 | iphone     | 102000 |
+|   2 | airpode    |  15300 |
+|   3 | screencard |  49.98 |
+|   4 | earphone   |   71.4 |
+|   5 | pouch      |   61.2 |
+|   6 | soap       |     20 |
++-----+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    124 |    4 |        2 |
+|    123 |    1 |        1 |
+|    125 |    2 |        3 |
+|    126 |    3 |        5 |
+|    123 |    2 |        4 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select pname from product where pid in (select pid from invoice_item where quantity=3);
++---------+
+| pname   |
++---------+
+| airpode |
++---------+
+1 row in set (0.00 sec)
+
