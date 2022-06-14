@@ -1,0 +1,109 @@
+18  NoSQL – CRUD
+================
+
+
+-------------------------------------------------------------------------------
+1.Write a MongoDB query to create an INVOICE database and collections (CUSTOMER,
+PRODUCT) and its corresponding documents.
+================================================================================
+> use invoice
+switched to db invoice
+> db.customer.insert({"name":"anand","city":"calicut","ph_no":8900787866,"age":40})
+WriteResult({ "nInserted" : 1 })
+> db.customer.insert({"name":"nahim","city":"usa","ph_no":746732348,"age":24})
+WriteResult({ "nInserted" : 1 })
+> db.customer.insert({"name":"safus","city":"dubai","ph_no":'787754179',"age":24})
+WriteResult({ "nInserted" : 1 })
+> db.customer.insert({"name":"thoha","city":"mysore","ph_no":'73060702',"age":23})
+WriteResult({ "nInserted" : 1 })
+
+
+
+> db.product.insert({"pname":"book","price":'20'})
+WriteResult({ "nInserted" : 1 })
+> db.product.insert({"pname":"pen","price":'5'})
+WriteResult({ "nInserted" : 1 })
+> db.product.insert({"pname":"pencil","price":'4'})
+WriteResult({ "nInserted" : 1 })
+> db.product.insert({"pname":"scale","price":'10'})
+WriteResult({ "nInserted" : 1 })
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------
+2.Write a MongoDB query to find all documents from the collection CUSTOMER
+================================================================================
+
+
+> db.customer.find().pretty()
+{
+	"_id" : ObjectId("62a81746476cc5e3887d58b8"),
+	"name" : "anand",
+	"city" : "calicut",
+	"ph_no" : 8900787866,
+	"age" : 40
+}
+{
+	"_id" : ObjectId("62a817c7476cc5e3887d58b9"),
+	"name" : "nahim",
+	"city" : "usa",
+	"ph_no" : 746732348,
+	"age" : 24
+}
+{
+	"_id" : ObjectId("62a8182a476cc5e3887d58ba"),
+	"name" : "safus",
+	"city" : "dubai",
+	"ph_no" : "787754179",
+	"age" : 24
+}
+{
+	"_id" : ObjectId("62a81859476cc5e3887d58bb"),
+	"name" : "thoha",
+	"city" : "mysore",
+	"ph_no" : "73060702",
+	"age" : 23
+}
+
+
+---------------------------------------------------------------------------------
+3.Write a MongoDB query to update the city in the collection CUSTOMER.
+=================================================================================
+
+> db.customer.update({city:"calicut"},{$set:{city:"england"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+> db.customer.findOne({city:"england"})
+{
+	"_id" : ObjectId("62a81746476cc5e3887d58b8"),
+	"name" : "anand",
+	"city" : "england",
+	"ph_no" : 8900787866,
+	"age" : 40
+}
+
+
+
+
+
+------------------------------------------------------------------------------------
+4.Write a MongoDB query to delete the first matched document whose city is “ENGLAND”.
+====================================================================================
+
+ db.CUSTOMER.deleteOne({City:"Calicut"})
+{ "acknowledged" : true, "deletedCount" : 1 }
+
+db.customer.find()
+{ "_id" : ObjectId("62a82b0826456afecfd0dbb4"), "name" : "nahim", "city" : "usa", "ph_no" : 746732348, "age" : 24 }
+{ "_id" : ObjectId("62a82b1f26456afecfd0dbb5"), "name" : "safus", "city" : "dubai", "ph_no" : "787754179", "age" : 24 }
+{ "_id" : ObjectId("62a82b2c26456afecfd0dbb6"), "name" : "thoha", "city" : "mysore", "ph_no" : "73060702", "age" : 23 }
+> 
+
+ 
+
