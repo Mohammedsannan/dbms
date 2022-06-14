@@ -1,0 +1,72 @@
+EXPERIMENT NO.19 NoSQL – RETRIEVING DATA
+========================================
+
+1.Write a MongoDB query to display the customer documents having city ‘dubai’,’mysore’.
+==================================================================================
+> db.customer.find({$or:[{"city":"usa"},{"city":"dubai"}]}).pretty()
+{
+	"_id" : ObjectId("62a82b0826456afecfd0dbb4"),
+	"name" : "nahim",
+	"city" : "usa",
+	"ph_no" : 746732348,
+	"age" : 24
+}
+{
+	"_id" : ObjectId("62a82b1f26456afecfd0dbb5"),
+	"name" : "safus",
+	"city" : "dubai",
+	"ph_no" : "787754179",
+	"age" : 24
+}
+
+> 
+
+
+``````````````````````````````````````````````````````````````````````````````````
+2.Write a MongoDB query to display all customer documents who have age >28.
+==================================================================================
+
+> db.customer.find({"age":{$gt:23}}).pretty()
+{
+	"_id" : ObjectId("62a82b0826456afecfd0dbb4"),
+	"name" : "nahim",
+	"city" : "usa",
+	"ph_no" : 746732348,
+	"age" : 24
+}
+{
+	"_id" : ObjectId("62a82b1f26456afecfd0dbb5"),
+	"name" : "safus",
+	"city" : "dubai",
+	"ph_no" : "787754179",
+	"age" : 24
+}
+
+
+``````````````````````````````````````````````````````````````````````````````````
+3.Write a MongoDB query to find customer documents who not live in ‘tvm’.
+==================================================================================
+
+> db.customer.find({"city":{$ne:"TVM"}}).pretty()
+{
+	"_id" : ObjectId("62a82b0826456afecfd0dbb4"),
+	"name" : "nahim",
+	"city" : "usa",
+	"ph_no" : 746732348,
+	"age" : 24
+}
+{
+	"_id" : ObjectId("62a82b1f26456afecfd0dbb5"),
+	"name" : "safus",
+	"city" : "dubai",
+	"ph_no" : "787754179",
+	"age" : 24
+}
+{
+	"_id" : ObjectId("62a82b2c26456afecfd0dbb6"),
+	"name" : "thoha",
+	"city" : "mysore",
+	"ph_no" : "73060702",
+	"age" : 23
+}
+
